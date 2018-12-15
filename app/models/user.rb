@@ -6,4 +6,6 @@ class User < ApplicationRecord
   
   has_many :owner_rooms, class_name: 'Room', foreign_key: 'owner_id'
   has_many :participant_rooms, class_name: 'Room', foreign_key: 'participant_id'
+
+  has_many :messages
 end
