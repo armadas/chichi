@@ -10,8 +10,46 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <header>
+      <div class='header-logo'>
+        <%= link_to 'FIND', '/' %>
+      </div>
+      <ul class='header-menus'>
+        <li>
+          <%= link_to "chichiとは", '/about' %>
+        </li>
+        <li>
+          <%= link_to 'ユーザー一覧', '/items' %>
+        </li>
+        <% if user_signed_in? %>
+        <li>
+          <%= link_to 'mypage', '/mypage' %>
+        </li>
+        <li>
+          <%= link_to 'logout', destroy_user_session_path, method: :delete %>
+        </li>
+        <% else %>
+        <li>
+          <%= link_to 'sign up', new_user_registration_path %>
+        </li>
+        <li>
+          <%= link_to 'login', new_user_session_path %>
+        </li>
+        <% end%>
+        </li>
+    </header>
+
+    <% if flash[:notice]%>
+      <div class='flash'>
+        <%= flash[:notice] %>
+      </div>
+    <% elsif flash[:error_message]%> 
+      <div class='error-flash'>
+        <%= flash[:error_message] %>
+      </div>
+    <% end %>  
+  
+    <p class='alert'><%= alert %></p>
     <%= yield %>
   </body>
 </html>
